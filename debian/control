@@ -1,0 +1,73 @@
+Source: pacparser
+Section: libs
+Priority: extra
+Maintainer: Manu Garg <manugarg@gmail.com>
+Uploaders: Andrew Pollock <apollock@debian.org>
+Build-Depends: debhelper (>= 5), python-dev, dh-python
+Standards-Version: 3.9.2
+
+Package: libpacparser1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: library to parse proxy auto-config files
+ a library to parse proxy auto-config (PAC) files. Proxy auto-config files are
+ a vastly used proxy configuration method these days. Web browsers can use a PAC
+ file to determine which proxy server to use or whether to go direct for a given
+ URL. PAC files are written in JavaScript and can be programmed to return
+ different proxy methods (e.g. "PROXY proxy1:port; DIRECT") depending upon URL,
+ source IP address, protocol, time of the day etc. PAC files introduce a lot of
+ possibilities.
+ .
+ Needless to say, PAC files are now a widely accepted method for proxy
+ configuration management and companies all over are using them in corporate
+ environments. Almost all popular web browsers support PAC files. The idea
+ behind pacparser is to make it easy to add this PAC file parsing capability to
+ any program (C and Python supported right now).
+ .
+ This package contains the shared library, and pactester, a tool for testing
+ PAC files
+
+Package: libpacparser-dev
+Section: libdevel
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: libpacparser1-dev
+Conflicts: libpacparser1-dev
+Architecture: any
+Description: library to parse proxy auto-config files (development files)
+ a library to parse proxy auto-config (PAC) files. Proxy auto-config files are
+ a vastly used proxy configuration method these days. Web browsers can use a PAC
+ file to determine which proxy server to use or whether to go direct for a given
+ URL. PAC files are written in JavaScript and can be programmed to return
+ different proxy methods (e.g. "PROXY proxy1:port; DIRECT") depending upon URL,
+ source IP address, protocol, time of the day etc. PAC files introduce a lot of
+ possibilities.
+ .
+ Needless to say, PAC files are now a widely accepted method for proxy
+ configuration management and companies all over are using them in corporate
+ environments. Almost all popular web browsers support PAC files. The idea
+ behind pacparser is to make it easy to add this PAC file parsing capability to
+ any program (C and Python supported right now).
+ .
+ This package contains the header files to build against the shared library.
+
+Package: python-pacparser
+Section: python
+Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Architecture: any
+Description: Python module to parse proxy auto-config files
+ a library to parse proxy auto-config (PAC) files. Proxy auto-config files are
+ a vastly used proxy configuration method these days. Web browsers can use a PAC
+ file to determine which proxy server to use or whether to go direct for a given
+ URL. PAC files are written in JavaScript and can be programmed to return
+ different proxy methods (e.g. "PROXY proxy1:port; DIRECT") depending upon URL,
+ source IP address, protocol, time of the day etc. PAC files introduce a lot of
+ possibilities.
+ .
+ Needless to say, PAC files are now a widely accepted method for proxy
+ configuration management and companies all over are using them in corporate
+ environments. Almost all popular web browsers support PAC files. The idea
+ behind pacparser is to make it easy to add this PAC file parsing capability to
+ any program (C and Python supported right now).
+ .
+ This package contains the Python bindings for the shared library

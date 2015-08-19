@@ -1,0 +1,17 @@
+This package was debianized by Andrew Pollock <apollock@debian.org> on
+Thu, 14 Aug 2008 12:09:42 -0700.
+
+It was downloaded from http://code.google.com/p/pacparser
+
+Upstream Author: Manu Garg <manugarg@gmail.com>
+
+Copyright: 2007, 2008 Manu Garg <manugarg@gmail.com>
+Copyright 2009 Google Inc. All Rights Reserved.
+
+License:
+
+LGPLv3
+
+
+The Debian packaging is (C) 2008, Andrew Pollock <apollock@debian.org> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
