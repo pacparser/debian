@@ -22,7 +22,7 @@
 # packaging script.
 -include version.mk
 
-VERSION ?= $(shell hg parents | awk 'NR==1 {print $$2}')
+VERSION ?= $(shell git describe --always --tags --candidate=100)
 
 PREFIX ?= /usr
 OS_ARCH := $(subst /,_,$(shell uname -s | sed /\ /s//_/))
@@ -103,6 +103,9 @@ testpactester: pactester
 	echo "Running tests for pactester."
 	NO_INTERNET=$(NO_INTERNET) ../tests/runtests.sh
 
+docs:
+	../tools/generatedocs.sh
+
 install: all
 	install -d $(LIB_PREFIX) $(INC_PREFIX) $(BIN_PREFIX)
 	install -m 644 $(LIBRARY) $(LIB_PREFIX)/$(LIBRARY)
@@ -111,10 +114,10 @@ install: all
 	install -m 644 pacparser.h $(INC_PREFIX)/pacparser.h
 	# install pactester manpages
 	install -d $(MAN_PREFIX)/man1/
-	(test -d ../docs && install -m 644 ../docs/*.1 $(MAN_PREFIX)/man1/) || true
+	(test -d ../docs && install -m 644 ../docs/man/man1/*.1 $(MAN_PREFIX)/man1/) || true
 	# install pacparser manpages
 	install -d $(MAN_PREFIX)/man3/
-	(test -d ../docs && install -m 644 ../docs/*.3 $(MAN_PREFIX)/man3/) || true
+	(test -d ../docs && install -m 644 ../docs/man/man3/*.3 $(MAN_PREFIX)/man3/) || true
 	# install html docs
 	install -d $(PREFIX)/share/doc/pacparser/html/
 	(test -d ../docs/html && install -m 644 ../docs/html/* $(PREFIX)/share/doc/pacparser/html/) || true

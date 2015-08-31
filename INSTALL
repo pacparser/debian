@@ -2,11 +2,11 @@ On Unix-like Systems:
 ####################
 
 You can download latest pacparser source code tarball from:
-  http://code.google.com/p/pacparser/downloads/list.
+  https://github.com/pacparser/pacparser/releases
 
-You can also get the latest source code from mercurial (hg) repository by
+You can also get the latest source code from github (git) repository by
 following instructions at:
-  http://code.google.com/p/pacparser/source
+  https://github.com/pacparser/pacparser
 
 * pacparser C library and pactester:
   ----------------------------------
@@ -28,7 +28,7 @@ Binary Distribution:
 ===================
 
 Compiled packages for win32 systems can be downloaded from:
-http://code.google.com/p/pacparser/downloads/list
+https://github.com/pacparser/pacparser/releases
 
 * C Library and pactester:
   -----------------------
