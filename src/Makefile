@@ -22,7 +22,7 @@
 # packaging script.
 -include version.mk
 
-VERSION ?= $(shell hg parents | awk 'NR==1 {print $$2}')
+VERSION ?= $(shell git describe --always --tags --candidate=100)
 
 PREFIX ?= /usr
 OS_ARCH := $(subst /,_,$(shell uname -s | sed /\ /s//_/))
@@ -73,7 +73,7 @@ BIN_PREFIX = $(PREFIX)/bin
 MAN_PREFIX = $(PREFIX)/share/man
 
 .PHONY: clean pymod install-pymod
-all: testpactester
+all: testpactester libpacparser.a
 
 spidermonkey/js/src: spidermonkey/js-?.?.?.tar.gz
 	tar xzvf spidermonkey/js-?.?.?.tar.gz -C spidermonkey
@@ -90,6 +90,9 @@ pacparser.o: pacparser.c pac_utils.h pacparser.h jsapi_buildstamp
 	$(CC) $(CFLAGS) $(SHFLAGS) -c pacparser.c -o pacparser.o
 	touch pymod/pacparser_o_buildstamp
 
+libpacparser.a: pacparser.o libjs.a
+	libtool -static -o libpacparser.a pacparser.o libjs.a
+
 $(LIBRARY): pacparser.o libjs.a
 	$(MKSHLIB) $(LIB_OPTS) -o $(LIBRARY) pacparser.o libjs.a $(LDFLAGS)
 
@@ -103,6 +106,9 @@ testpactester: pactester
 	echo "Running tests for pactester."
 	NO_INTERNET=$(NO_INTERNET) ../tests/runtests.sh
 
+docs:
+	../tools/generatedocs.sh
+
 install: all
 	install -d $(LIB_PREFIX) $(INC_PREFIX) $(BIN_PREFIX)
 	install -m 644 $(LIBRARY) $(LIB_PREFIX)/$(LIBRARY)
@@ -111,10 +117,10 @@ install: all
 	install -m 644 pacparser.h $(INC_PREFIX)/pacparser.h
 	# install pactester manpages
 	install -d $(MAN_PREFIX)/man1/
-	(test -d ../docs && install -m 644 ../docs/*.1 $(MAN_PREFIX)/man1/) || true
+	(test -d ../docs && install -m 644 ../docs/man/man1/*.1 $(MAN_PREFIX)/man1/) || true
 	# install pacparser manpages
 	install -d $(MAN_PREFIX)/man3/
-	(test -d ../docs && install -m 644 ../docs/*.3 $(MAN_PREFIX)/man3/) || true
+	(test -d ../docs && install -m 644 ../docs/man/man3/*.3 $(MAN_PREFIX)/man3/) || true
 	# install html docs
 	install -d $(PREFIX)/share/doc/pacparser/html/
 	(test -d ../docs/html && install -m 644 ../docs/html/* $(PREFIX)/share/doc/pacparser/html/) || true
@@ -131,6 +137,6 @@ install-pymod: pymod
 	cd pymod && ARCHFLAGS="" $(PYTHON) setup.py install --root="$(DESTDIR)/" $(EXTRA_ARGS)
 
 clean:
-	rm -f $(LIBRARY_LINK) $(LIBRARY) libjs.a pacparser.o pactester pymod/pacparser_o_buildstamp jsapi_buildstamp
+	rm -f $(LIBRARY_LINK) $(LIBRARY) libjs.a libpacparser.a pacparser.o pactester pymod/pacparser_o_buildstamp jsapi_buildstamp
 	cd pymod && python setup.py clean --all
 	cd spidermonkey && $(MAKE) clean
