@@ -1,3 +1,10 @@
+pacparser (1.3.4-0) unstable; urgency=low
+
+  * Sync to upstream version 1.3.4
+  * List of changes: https://github.com/pacparser/pacparser/releases
+
+ -- Manu Garg <manugarg@gmail.com>  Sun, 30 Aug 2015 23:33:07 -0700
+
 pacparser (1.3.0-2.1) unstable; urgency=medium
 
   * Non-maintainer upload.
