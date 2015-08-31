@@ -42,6 +42,7 @@ build-arch-stamp: configure-stamp
 
 	NO_INTERNET=yes $(MAKE) -C src
 	NO_INTERNET=yes $(MAKE) -C src pymod
+	NO_INTERNET=yes $(MAKE) -C src pymod PYTHON=python3
 	touch $@
 
 build-indep: build-indep-stamp
@@ -81,9 +82,11 @@ install-arch:
 	# debian/tmp.
 	NO_INTERNET=yes $(MAKE) -C src DESTDIR=$(CURDIR)/debian/tmp install
 	NO_INTERNET=yes $(MAKE) -C src DESTDIR=$(CURDIR)/debian/tmp install-pymod EXTRA_ARGS=--install-layout=deb
+	NO_INTERNET=yes $(MAKE) -C src DESTDIR=$(CURDIR)/debian/tmp install-pymod EXTRA_ARGS=--install-layout=deb PYTHON=python3
 
 	dh_install -s --autodest
 	dh_python2 -s
+	dh_python3 -s
 # Must not depend on anything. This is to be called by
 # binary-arch/binary-indep
 # in another 'make' thread.
