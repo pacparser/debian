@@ -97,6 +97,7 @@ binary-common:
 	dh_installdocs -a -XREADME.win32
 	dh_installexamples -plibpacparser1 -X*.py
 	dh_installexamples -ppython-pacparser -X*.c
+	dh_installexamples -ppython3-pacparser -X*.c
 	dh_installman -a
 	dh_link -a
 	dh_strip -a
