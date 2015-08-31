@@ -6,4 +6,5 @@
 # Compulsory line, this is a version 3 file
 version=3
 
-http://code.google.com/p/pacparser/downloads/list http://pacparser.googlecode.com/files/pacparser-(\d+)\.(\d+)\.(\d+)\.tar\.gz
+opts="filenamemangle=s/(?:.*)?v?(\d[\d\.]*)\.tar\.gz/<project>-$1.tar.gz/" \
+  https://github.com/pacparser/pacparser/tags (?:.*/)?v?(\d[\d\.]*)\.tar\.gz
